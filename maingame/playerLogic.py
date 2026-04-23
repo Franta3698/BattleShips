@@ -2,7 +2,6 @@ class Player:
     def __init__(self, Name):
         self.Name = Name
         self.Hp = 12
-        self.AliveShips = 4
         self.Board = [['~' for _ in range(8)] for _ in range(8)]
         self.ShootBoard = [['~' for _ in range(8)] for _ in range(8)]
         self.Placed = [False for _ in range(4)]
@@ -59,19 +58,38 @@ class Player:
 
 
     def shoot(self, enemyBoard, cordX, cordY):
+        if enemyBoard[cordX][cordY] == 'X' or enemyBoard[cordX][cordY] == 'O':
+            print("Zadejte pole na které jste ještě nestřílel")
+            return True
         if enemyBoard[cordX][cordY] == '■':
             self.ShootBoard[cordX][cordY] = 'X'
             for row in self.ShootBoard:
                 print(' '.join(row))
+
             return True
         else:
             self.ShootBoard[cordX][cordY] = 'O'
             for row in self.ShootBoard:
                 print(' '.join(row))
             return False
+        
+
+
     def printBoard(self):
+        print("TABULKA VAŠICH LODÍ")
+        print("  0 1 2 3 4 5 6 7")
+        i = 0
         for row in self.Board:
-            print(' '.join(row))
+            print(str(i) + " " + str(' '.join(row)))
+            i += 1
+
+    def printShootBoard(self):
+        print("TABULKA ZÁSAHŮ LODÍ")
+        print("  0 1 2 3 4 5 6 7")
+        i = 0
+        for row in self.ShootBoard:
+            print(str(i) + " " + str(' '.join(row)))
+            i += 1
         
         
 
@@ -92,3 +110,5 @@ def sonar(board, cordX, cordY, shipLenght, orientation = False):
                 if board[cordX + i][cordY] == '■':
                     return False
     return True
+
+

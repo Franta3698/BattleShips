@@ -23,5 +23,5 @@ Nebo lze importovat jednotlive funkce:
     vysledek = secti(2, 3)
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = "František Hradil"
