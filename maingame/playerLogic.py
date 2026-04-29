@@ -112,3 +112,6 @@ def sonar(board, cordX, cordY, shipLenght, orientation = False):
     return True
 
 
+
+if __name__ == "__main__":
+    pass

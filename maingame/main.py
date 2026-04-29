@@ -66,5 +66,6 @@ def main():
         again = input("Chcete hrát znova?(Y,n), default n").strip().upper()
         if again != 'Y':
             break
+        
 if __name__ == "__main__":
     main()
