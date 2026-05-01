@@ -70,9 +70,53 @@ pip install -r requirements.txt
 Aplikaci spustíte jako modul z kořenového adresáře:
     ```Bash
     python -m maingame.main
+    python -m pytest
 ## 🧪 Testování
+
+**Spuštění testů**
+Používá framework pytest pro ověření logiky lodi a sonaru.
     ```Bash
     python -m pytest
-
-Spuštění testů s coverage reportem
+**Spuštění testů s coverage reportem**
 Zjistí, kolik procent kódu je pokryto testy.
+    ```Bash
+    python -m pytest --cov=maingame --cov-report=term-missing
+**Statická analýza kódu (linting)**
+Kontrola dodržování stylu PEP 8.
+    ```Bash
+    python -m flake8 maingame/ tests/
+
+## 📁 Struktura projektu
+
+
+projekt/
+├── maingame/               # Zdrojový kód aplikace
+│   ├── __init__.py         # Metadata a dokumentace balíčku
+│   ├── main.py             # Vstupní bod aplikace (Herní smyčka)
+│   └── playerLogic.py      # Logika hráčů a herní desky
+├── tests/                  # Unit testy
+│   ├── __init__.py
+│   └── testPlayer.py       # Testy pro třídu Player a sonar
+├── docs/                   # Automaticky generovaná dokumentace (HTML)
+├── .gitlab-ci.yml          # CI/CD pipeline konfigurace
+├── requirements.txt        # Python závislosti (pdoc, pytest, flake8)
+├── pytest.ini              # Konfigurace testovacího prostředí
+└── README.md               # Dokumentace projektu
+
+
+## 🔄 CI/CD Pipeline
+Projekt využívá GitLab CI/CD pro automatizaci kvality kódu:
+
+Stage,Nástroj,Popis
+lint,flake8,Kontrola formátování a stylu kódu.
+test,pytest,Automatické spouštění unit testů.
+docs,pdoc,Generování HTML dokumentace z docstringů.
+
+## 📖 Generování dokumentace
+
+Dokumentace je psána v NumPy stylu a generována nástrojem pdoc.
+    Bash
+    pdoc maingame tests -o docs --docformat numpy
+
+## 📝 Licence
+Tento projekt byl vytvořen jako závěrečný projekt na UTB ve Zlíně.

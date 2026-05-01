@@ -1,9 +1,7 @@
-
-
 """
 Modul pro logiku hry Námořní bitva.
 
-Tento modul definuje třídu Player pro správu herního stavu jednotlivých 
+Tento modul definuje třídu Player pro správu herního stavu jednotlivých
 hráčů a pomocnou funkci sonar pro validaci umisťování lodí.
 
 Třídy
@@ -18,27 +16,25 @@ sonar
 """
 
 
-
-
-
 class Player:
     """
     Reprezentuje hráče a jeho herní stav.
 
     Attributes
     ----------
-    Name : str
+    name : str
         Jméno hráče.
-    Hp : int
+    hp : int
         Počet zbývajících životů (celkový počet polí lodí).
-    Board : list
+    board : list
         Dvojrozměrné pole s vlastními loděmi.
-    ShootBoard : list
+    shoot_board : list
         Dvojrozměrné pole se záznamem střelby na nepřítele.
-    Placed : list
+    placed : list
         Informace o tom, které lodě již byly umístěny.
     """
-    def __init__(self, Name):
+
+    def __init__(self, name):
         """
         Inicializuje nového hráče.
 
@@ -47,13 +43,13 @@ class Player:
         name : str
             Jméno hráče.
         """
-        self.Name = Name
-        self.Hp = 15
-        self.Board = [['~' for _ in range(8)] for _ in range(8)]
-        self.ShootBoard = [['~' for _ in range(8)] for _ in range(8)]
-        self.Placed = [False for _ in range(4)]
+        self.name = name
+        self.hp = 15
+        self.board = [['~' for _ in range(8)] for _ in range(8)]
+        self.shoot_board = [['~' for _ in range(8)] for _ in range(8)]
+        self.placed = [False for _ in range(4)]
 
-    def placeBattleship(self, cordX, cordY, orientation = False): #4
+    def place_battleship(self, cord_x, cord_y, orientation=False):
         """
         Umístí bitevní loď (velikost 5) na herní pole.
 
@@ -66,21 +62,20 @@ class Player:
         orientation : bool, optional
             Orientace lodi. Výchozí je False.
         """
-        shipLength = 5
-
-        if sonar(self.Board, cordX, cordY, shipLength, orientation):
-            if orientation:
-                for i in range(shipLength):
-                    self.Board[cordX][cordY + i] = '■'
-            else:
-                for i in range(shipLength):
-                    self.Board[cordX + i][cordY] = '■'
-            self.Placed[0] = True
+        ship_length = 5
+        if sonar(self.board, cord_x, cord_y, ship_length, orientation):
+            for i in range(ship_length):
+                if orientation:
+                    self.board[cord_x][cord_y + i] = '■'
+                else:
+                    self.board[cord_x + i][cord_y] = '■'
+            self.placed[0] = True
         else:
             print("Lodička se nepoložila :(")
-    def placeCruiser(self, cordX, cordY, orientation = False): #3
+
+    def place_cruiser(self, cord_x, cord_y, orientation=False):
         """
-        Umístí bitevní loď (velikost 4) na herní pole.
+        Umístí křižník (velikost 4) na herní pole.
 
         Parameters
         ----------
@@ -91,20 +86,20 @@ class Player:
         orientation : bool, optional
             Orientace lodi. Výchozí je False.
         """
-        shipLength = 4
-        if sonar(self.Board, cordX, cordY, shipLength, orientation):
-            if orientation:
-                for i in range(shipLength):
-                    self.Board[cordX][cordY + i] = '■'
-            else:
-                for i in range(shipLength):
-                    self.Board[cordX + i][cordY] = '■'
-            self.Placed[1] = True
+        ship_length = 4
+        if sonar(self.board, cord_x, cord_y, ship_length, orientation):
+            for i in range(ship_length):
+                if orientation:
+                    self.board[cord_x][cord_y + i] = '■'
+                else:
+                    self.board[cord_x + i][cord_y] = '■'
+            self.placed[1] = True
         else:
             print("Lodička se nepoložila :(")
-    def placeSubmarine(self, cordX, cordY, orientation = False): #3
+
+    def place_submarine(self, cord_x, cord_y, orientation=False):
         """
-        Umístí bitevní loď (velikost 3) na herní pole.
+        Umístí ponorku (velikost 3) na herní pole.
 
         Parameters
         ----------
@@ -115,20 +110,20 @@ class Player:
         orientation : bool, optional
             Orientace lodi. Výchozí je False.
         """
-        shipLength = 3
-        if sonar(self.Board, cordX, cordY, shipLength, orientation):
-            if orientation:
-                for i in range(shipLength):
-                    self.Board[cordX][cordY + i] = '■'
-            else:
-                for i in range(shipLength):
-                    self.Board[cordX + i][cordY] = '■'
-            self.Placed[2] = True
+        ship_length = 3
+        if sonar(self.board, cord_x, cord_y, ship_length, orientation):
+            for i in range(ship_length):
+                if orientation:
+                    self.board[cord_x][cord_y + i] = '■'
+                else:
+                    self.board[cord_x + i][cord_y] = '■'
+            self.placed[2] = True
         else:
             print("Lodička se nepoložila :(")
-    def placeDestroyer(self, cordX, cordY, orientation = False): #3
+
+    def place_destroyer(self, cord_x, cord_y, orientation=False):
         """
-        Umístí bitevní loď (velikost 3) na herní pole.
+        Umístí torpédoborec (velikost 3) na herní pole.
 
         Parameters
         ----------
@@ -139,20 +134,18 @@ class Player:
         orientation : bool, optional
             Orientace lodi. Výchozí je False.
         """
-        shipLength = 3
-        if sonar(self.Board, cordX, cordY, shipLength, orientation):
-            if orientation:
-                for i in range(shipLength):
-                    self.Board[cordX][cordY + i] = '■'
-            else:
-                for i in range(shipLength):
-                    self.Board[cordX + i][cordY] = '■'
-            self.Placed[3] = True
+        ship_length = 3
+        if sonar(self.board, cord_x, cord_y, ship_length, orientation):
+            for i in range(ship_length):
+                if orientation:
+                    self.board[cord_x][cord_y + i] = '■'
+                else:
+                    self.board[cord_x + i][cord_y] = '■'
+            self.placed[3] = True
         else:
             print("Lodička se nepoložila :(")
 
-
-    def shoot(self, enemyBoard, cordX, cordY):
+    def shoot(self, enemy_board, cord_x, cord_y):
         """
         Provede výstřel na zadané pole soupeře.
 
@@ -169,58 +162,36 @@ class Player:
         -------
         bool or str
             True při zásahu, False při minutí, "Repeat" při opakované střele.
-
-        Examples
-        --------
-        >>> player.shoot(enemy_board, 0, 0)
-        True
-        >>> player.shoot(enemy_board, 0, 0)
-        'Repeat'
         """
-        if self.ShootBoard[cordX][cordY] == 'X' or self.ShootBoard[cordX][cordY] == 'O':
+        if self.shoot_board[cord_x][cord_y] in ('X', 'O'):
             print("Zadejte pole na které jste ještě nestřílel")
             return "Repeat"
-        if enemyBoard[cordX][cordY] == '■':
-            self.ShootBoard[cordX][cordY] = 'X'
-            for row in self.ShootBoard:
-                print(' '.join(row))
 
+        if enemy_board[cord_x][cord_y] == '■':
+            self.shoot_board[cord_x][cord_y] = 'X'
             return True
         else:
-            self.ShootBoard[cordX][cordY] = 'O'
-            for row in self.ShootBoard:
-                print(' '.join(row))
+            self.shoot_board[cord_x][cord_y] = 'O'
             return False
-        
 
-
-    def printBoard(self):
+    def print_board(self):
         """Vypíše herní pole s vlastními loděmi do konzole."""
         print("TABULKA VAŠICH LODÍ")
         print("  0 1 2 3 4 5 6 7")
-        i = 0
-        for row in self.Board:
-            print(str(i) + " " + str(' '.join(row)))
-            i += 1
+        for i, row in enumerate(self.board):
+            print(f"{i} {' '.join(row)}")
 
-    def printShootBoard(self):
+    def print_shoot_board(self):
         """Vypíše pole se zásahy a minutími do konzole."""
         print("TABULKA ZÁSAHŮ LODÍ")
         print("  0 1 2 3 4 5 6 7")
-        i = 0
-        for row in self.ShootBoard:
-            print(str(i) + " " + str(' '.join(row)))
-            i += 1
-        
-        
+        for i, row in enumerate(self.shoot_board):
+            print(f"{i} {' '.join(row)}")
 
 
-def sonar(board, cordX, cordY, shipLenght, orientation = False):
+def sonar(board, cord_x, cord_y, ship_length, orientation=False):
     """
     Ověří, zda je možné umístit loď na dané souřadnice.
-
-    Kontroluje, zda loď nepřetéká z herního pole a zda nekoliduje
-    s již umístěnými loděmi.
 
     Parameters
     ----------
@@ -233,30 +204,29 @@ def sonar(board, cordX, cordY, shipLenght, orientation = False):
     ship_length : int
         Délka umisťované lodi v počtu polí.
     orientation : bool, optional
-        Orientace lodi. False pro vodorovnou (šířka), 
-        True pro svislou (výška). Výchozí je False.
+        False pro vodorovnou (šířka), True pro svislou (výška).
 
     Returns
     -------
     bool
         True, pokud je pozice validní, jinak False.
     """
-    if (cordX > 7 or cordX < 0 ) or (cordY > 7 or cordY < 0):
+    if not (0 <= cord_x <= 7 and 0 <= cord_y <= 7):
         return False
+
     if orientation:
-        if cordY + shipLenght-1 > 7:
+        if cord_y + ship_length - 1 > 7:
             return False
-        for i in range(shipLenght):
-            if board[cordX][cordY + i] == '■':
+        for i in range(ship_length):
+            if board[cord_x][cord_y + i] == '■':
                 return False
     else:
-        if cordX + shipLenght-1 > 7:
+        if cord_x + ship_length - 1 > 7:
+            return False
+        for i in range(ship_length):
+            if board[cord_x + i][cord_y] == '■':
                 return False
-        for i in range(shipLenght):
-                if board[cordX + i][cordY] == '■':
-                    return False
     return True
-
 
 
 if __name__ == "__main__":
