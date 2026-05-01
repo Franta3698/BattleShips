@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="icon.svg" alt="Battleships Logo" width="80">
-</p>
+
 
 <h1 align="center">Námořní bitva (Battleships)</h1>
 
