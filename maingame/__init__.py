@@ -1,27 +1,21 @@
 """
-Hlavni balicek aplikace Ships.
+Hlavní balíček aplikace Námořní bitva (maingame).
 
-Tento balicek obsahuje moduly pro jednoduchou CLI hru Ships
-s logikou polí a hráčů.
+Tento balíček obsahuje moduly pro konzolovou hru pro dva hráče.
+Zahrnuje herní logiku, správu hráčů a uživatelské rozhraní.
 
 Moduly
 ------
 main
-    Hlavni modul s CLI rozhranim a uzivatelskou interakci.
-functions
-    Modul s matematickymi funkcemi (scitani, odcitani, nasobeni, atd.).
+    Hlavní modul s CLI rozhraním a řízením herní smyčky.
+playerLogic
+    Modul obsahující třídu Player a funkce pro práci s herním polem.
 
-Pouziti
+Použití
 -------
-Aplikaci lze spustit prikazem:
-
-    python -m calculator.main
-
-Nebo lze importovat jednotlive funkce:
-
-    from calculator.functions import secti, odecti
-    vysledek = secti(2, 3)
+Hru lze spustit z kořenového adresáře příkazem:
+    python -m maingame.main
 """
 
-__version__ = "1.0.2"
+__version__ = "1.0.0"
 __author__ = "František Hradil"
