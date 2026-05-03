@@ -19,7 +19,7 @@ Průběh hry
 """
 
 import os
-from . import playerLogic
+import maingame.playerLogic as playerLogic
 
 
 def main():
@@ -35,6 +35,7 @@ def main():
         players = []
         for i in range(2):
             os.system('cls' if os.name == 'nt' else 'clear')
+            print("Hra Bitevní loďe")
             name = input(f"Zadejte název {i + 1}. hráče:")
             players.append(playerLogic.Player(name))
             while False in players[i].placed:

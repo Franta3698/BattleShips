@@ -98,19 +98,19 @@ python -m flake8 maingame/ tests/
 ## 📁 Struktura projektu
 
 ```text
-projekt/
-├── maingame/
+Battleships/
+├── docs/               # Automaticky vytvořená dokumentace
+├── maingame/           # Zdrojový kód aplikace
 │   ├── __init__.py
-│   ├── main.py
-│   └── playerLogic.py
-├── tests/
-│   ├── __init__.py
-│   └── testPlayer.py
-├── docs/
-├── .gitlab-ci.yml
-├── requirements.txt
-├── pytest.ini
-└── README.md
+│   ├── main.py         # Vstupní bod aplikace
+│   └── playerLogic.py  # Hlavní funkce aplikace
+├── tests/              # Unit testy
+│   ├── __init__.py     
+│   └── testPlayer.py   # Testy pro playerLogic modul
+├── pytest.ini          # Konfigurace pytest
+├── README.md           # Tento soubor
+└──requirments.txt      # Python závislosti
+
 ```
 
 ---
