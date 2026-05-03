@@ -8,6 +8,7 @@ Moduly
 ------
 testPlayer
     Testy pro třídu Player a metodu výstřelu (shoot).
+    Testy pro metodu sonar
 """
 
 __version__ = "1.0.0"

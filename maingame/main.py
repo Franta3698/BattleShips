@@ -19,7 +19,7 @@ Průběh hry
 """
 
 import os
-import playerLogic
+from . import playerLogic
 
 
 def main():
@@ -40,44 +40,50 @@ def main():
             while False in players[i].placed:
                 print("Vyberte loď kterou chcete položit:")
                 if not players[i].placed[0]:
-                    print("1. Battle Ship 5")
+                    print("1. Battle Ship (Velikost 5)")
                 if not players[i].placed[1]:
-                    print("2. Cruiser 4")
+                    print("2. Cruiser (Velikost 4)")
                 if not players[i].placed[2]:
-                    print("3. Submarine 3")
+                    print("3. Submarine (Velikost 3)")
                 if not players[i].placed[3]:
-                    print("4. Destroyer 3")
+                    print("4. Destroyer (Velikost 3)")
                 try:
-                    ans = int(input("Zadejte číslo: "))
+                    ans = int(input("Zadejte číslo (1-4): "))
                     if ans < 1 or ans > 4 or players[i].placed[ans - 1]:
+                        os.system('cls' if os.name == 'nt' else 'clear')
                         continue
                 except ValueError:
+                    os.system('cls' if os.name == 'nt' else 'clear')
                     continue
 
+                os.system('cls' if os.name == 'nt' else 'clear')
                 players[i].print_board()
                 print("Zadejte pozici nejvíce levé horní části lodě.")
                 try:
-                    cord_x = int(input("řádek:"))
-                    cord_y = int(input("sloupec:"))
+                    cord_x = int(input("Zadejte řádek: "))
+                    cord_y = int(input("Zadejte sloupec: "))
                 except ValueError:
-                    print("Zadejte číselné hodnoty")
+                    os.system('cls' if os.name == 'nt' else 'clear')
                     continue
 
                 msg = "Zadejte orientaci lode (V - vyska, S - Sirka): "
-                orientation = input(msg).upper() == 'S'
+                ori = input(msg).upper() == 'S'
 
                 match ans:
                     case 1:
-                        players[i].place_battleship(cord_x, cord_y, orientation)
+                        players[i].place_battleship(cord_x, cord_y, ori)
                     case 2:
-                        players[i].place_cruiser(cord_x, cord_y, orientation)
+                        players[i].place_cruiser(cord_x, cord_y, ori)
                     case 3:
-                        players[i].place_submarine(cord_x, cord_y, orientation)
+                        players[i].place_submarine(cord_x, cord_y, ori)
                     case 4:
-                        players[i].place_destroyer(cord_x, cord_y, orientation)
-
+                        players[i].place_destroyer(cord_x, cord_y, ori)
+                os.system('cls' if os.name == 'nt' else 'clear')
                 players[i].print_board()
-                input("Pro polozeni dalsi lode zmacknete enter")
+                if False not in players[i].placed:
+                    input("Pro začátek hry protihráče zmáčkněte enter")
+                else:
+                    input("Pro polozeni dalsi lode zmacknete enter")
                 os.system('cls' if os.name == 'nt' else 'clear')
 
         while True:
@@ -91,14 +97,16 @@ def main():
             while success:
                 print(f"Hráč {players[p_idx].name} střílí:")
                 try:
-                    cord_x = int(input("řádek:"))
-                    cord_y = int(input("sloupec:"))
+                    cord_x = int(input("Zadejte řádek: "))
+                    cord_y = int(input("Zadejte sloupec: "))
                     success = players[p_idx].shoot(
                         players[e_idx].board, cord_x, cord_y
                     )
                     os.system('cls' if os.name == 'nt' else 'clear')
                     players[p_idx].print_shoot_board()
                 except (ValueError, IndexError):
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    players[p_idx].print_shoot_board()
                     print("Zadejte platné číselné hodnoty (0-7)")
                     continue
 
@@ -109,10 +117,11 @@ def main():
                         print(f"{msg}{players[e_idx].hp}")
                 if players[e_idx].hp <= 0:
                     break
-            os.system('cls' if os.name == 'nt' else 'clear')
 
             if players[e_idx].hp <= 0:
                 break
+            print("Vedle")
+            input("Pro začátek střelby protihráče zmáčkněte enter")
             turn += 1
 
         print(f"Hráč {players[p_idx].name} vyhrál!")
