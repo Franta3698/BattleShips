@@ -1,0 +1,23 @@
+filters:
+  and:
+    - file.inFolder("School/AK4PS/OKRUHY_2026")
+    - file.hasTag("okruh")
+properties:
+  cislo:
+    displayName: "#"
+  file.name:
+    displayName: Okruh
+  file.mtime:
+    displayName: Upraveno
+views:
+  - type: table
+    name: Všechny okruhy
+    order:
+      - cislo
+      - file.name
+      - file.mtime
+  - type: cards
+    name: Karty
+    order:
+      - cislo
+      - file.name
